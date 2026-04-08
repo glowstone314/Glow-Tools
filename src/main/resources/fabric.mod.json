@@ -5,7 +5,10 @@
   "name": "Glow Tools",
   "description": "Adds some configurable client-side tweaks\\n添加了一些可配置的客户端调整",
   "authors": ["Glow_Creeper"],
-  "contact": {},
+  "contact": {
+    "issues": "https://github.com/glowstone314/Glow-Tools/issues",
+    "sources": "https://github.com/glowstone314/Glow-Tools"
+  },
   "license": "MIT",
   "icon": "assets/glowtools/icon.png",
   "environment": "client",
