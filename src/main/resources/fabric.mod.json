@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "glowtools",
+  "version": "${version}",
+  "name": "Glow Tools",
+  "description": "Adds some configurable client-side tweaks\\n添加了一些可配置的客户端调整",
+  "authors": ["Glow_Creeper"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/glowtools/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "gc.mc.glowtools.client.GlowtoolsDataGenerator"
+    ],
+    "client": [
+      "gc.mc.glowtools.client.GlowtoolsClient"
+    ],
+    "main": [
+      "gc.mc.glowtools.Glowtools"
+    ],
+    "modmenu": [
+      "gc.mc.glowtools.client.gui.ModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "glowtools.mixins.json",
+    {
+      "config": "glowtools.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.4",
+    "fabric-api": "*",
+    "minecraft": "1.21.11",
+    "malilib": ">=0.27.6",
+    "tweakeroo": ">=0.27.5"
+  }
+}
