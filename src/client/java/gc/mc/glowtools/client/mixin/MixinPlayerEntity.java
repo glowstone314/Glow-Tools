@@ -32,7 +32,7 @@ public abstract class MixinPlayerEntity {
 
     @Unique
     private boolean isStandable(ClientPlayerEntity player, BlockPos pos) {
-        VoxelShape shape = player.getEntityWorld().getBlockState(pos).getCollisionShape(player.getEntityWorld(), pos);
+        VoxelShape shape = player.getWorld().getBlockState(pos).getCollisionShape(player.getWorld(), pos);
         return !shape.isEmpty();
     }
 

@@ -96,9 +96,9 @@ public class EntityAlertHandler {
                     Text title = Text.translatable("glowtools.chat.entity_alerts.disconnect_title");
                     Text reason =Text.literal("in " + currentTime.format(formatter) + "\nat " + formatPos(entity.getX(), entity.getY(), entity.getZ()));
 
-                    client.world.disconnect(null);
-                    client.disconnect(null);
-                    client.setScreen(new DisconnectedScreen(new TitleScreen(), title, reason));
+                    client.world.disconnect(title);
+                    client.disconnect(new DisconnectedScreen(new TitleScreen(), title, reason), true);
+                    //client.setScreen();
                 }
             });
         }
