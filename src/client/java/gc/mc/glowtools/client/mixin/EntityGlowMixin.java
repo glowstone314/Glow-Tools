@@ -36,7 +36,7 @@ public abstract class EntityGlowMixin {
                 }
             }
         }
-        if (!b) cir.cancel();
+        if (b) cir.setReturnValue(false);
     }
 
     @Inject(method = "getTeamColorValue", at = @At("HEAD"), cancellable = true)
