@@ -15,28 +15,41 @@ public abstract class EntityGlowMixin {
 
     @Inject(method = "isGlowing", at = @At("HEAD"), cancellable = true)
     private void onIsGlowing(CallbackInfoReturnable<Boolean> cir) {
+        boolean b = true;
         Entity entity = (Entity) (Object) this;
-        if (Configs.EntityAlerts.ENABLE_ALERTS.getBooleanValue() && Configs.EntityAlerts.ENABLE_GLOW.getBooleanValue()) {
+        if (Configs.EntityAlerts.ENABLE_GLOW.getBooleanValue()) {
             if (EntityAlertHandler.isTargetEntity(entity)) {
-                cir.setReturnValue(true);
+                if ((Configs.EntityAlerts.ENABLE_WANDERING_TRADER.getBooleanValue() && entity instanceof net.minecraft.entity.passive.WanderingTraderEntity) ||
+                        (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.PillagerEntity) ||
+                        (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof net.minecraft.entity.passive.FoxEntity) ||
+                        (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.DrownedEntity)) {
+                    cir.setReturnValue(true);
+                    b = false;
+                }
             }
-
         }
         if (Configs.TropicalFish.ENABLE_TROPICAL_FISH_ALERTS.getBooleanValue() && Configs.TropicalFish.ENABLE_GLOW.getBooleanValue()) {
             if (entity instanceof TropicalFishEntity fish) {
                 if (TropicalFishHandler.isTargetFish(fish)) {
                     cir.setReturnValue(true);
+                    b = false;
                 }
             }
         }
+        if (!b) cir.cancel();
     }
 
     @Inject(method = "getTeamColorValue", at = @At("HEAD"), cancellable = true)
     private void onGetTeamColorValue(CallbackInfoReturnable<Integer> cir) {
         Entity entity = (Entity) (Object) this;
-        if (Configs.EntityAlerts.ENABLE_ALERTS.getBooleanValue() && Configs.EntityAlerts.ENABLE_GLOW.getBooleanValue()) {
+        if (Configs.EntityAlerts.ENABLE_GLOW.getBooleanValue()) {
             if (EntityAlertHandler.isTargetEntity(entity)) {
-                cir.setReturnValue(Configs.EntityAlerts.GLOW_COLOR.getIntegerValue());
+                if ((Configs.EntityAlerts.ENABLE_WANDERING_TRADER.getBooleanValue() && entity instanceof net.minecraft.entity.passive.WanderingTraderEntity) ||
+                        (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.PillagerEntity) ||
+                        (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof net.minecraft.entity.passive.FoxEntity) ||
+                        (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.DrownedEntity)) {
+                    cir.setReturnValue(Configs.EntityAlerts.GLOW_COLOR.getIntegerValue());
+                }
             }
         }
         if (Configs.TropicalFish.ENABLE_TROPICAL_FISH_ALERTS.getBooleanValue() && Configs.TropicalFish.ENABLE_GLOW.getBooleanValue()) {

@@ -54,6 +54,9 @@ public class AlertSoundManager {
     }
 
     private static void playExternal(String path) {
+        if (path.startsWith("\"") && path.endsWith("\"")) {
+            path = path.substring(1, path.length() - 1);
+        }
         try {
             File soundFile = new File(path);
             if (!soundFile.exists()) return;
