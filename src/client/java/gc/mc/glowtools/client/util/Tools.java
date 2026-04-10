@@ -9,4 +9,9 @@ public class Tools {
     public static String formatPos(double x, double y, double z) {
         return String.format("%.1f, %.1f, %.1f", x, y, z);
     }
+    public static String addDefaultPrefix(String id) {
+        if (id.isEmpty()) return id;
+        if (!id.contains(":")) id = "minecraft:" + id;
+        return id;
+    }
 }
