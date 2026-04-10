@@ -1,0 +1,108 @@
+package gc.mc.glowtools.client.logic;
+
+import fi.dy.masa.malilib.util.MessageOutputType;
+import gc.mc.glowtools.client.Reference;
+import gc.mc.glowtools.client.config.Configs;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.DisconnectedScreen;
+import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.mob.PillagerEntity;
+import net.minecraft.entity.passive.FoxEntity;
+import net.minecraft.entity.passive.WanderingTraderEntity;
+import net.minecraft.entity.mob.DrownedEntity;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.text.Text;
+
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import static gc.mc.glowtools.client.util.Tools.addDefaultPrefix;
+import static gc.mc.glowtools.client.util.Tools.formatPos;
+
+public class EntityAlertHandler {
+
+    private static final Set<UUID> ALERTED_ENTITIES = new HashSet<>();
+
+    public static void init() {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.world != null) {
+                for (Entity entity : client.world.getEntities()) {
+                    if (isTargetEntity(entity) && !ALERTED_ENTITIES.contains(entity.getUuid())) {
+                        triggerAlert(entity);
+                        ALERTED_ENTITIES.add(entity.getUuid());
+                    }
+                }
+            }
+        });
+
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ALERTED_ENTITIES.clear());
+    }
+
+    public static boolean isTargetEntity(Entity entity) {
+        if (!Configs.EntityAlerts.ENABLE_ALERTS.getBooleanValue()) return false;
+        if (Configs.EntityAlerts.IGNORE_NAMED_ENTITIES.getBooleanValue() && entity.hasCustomName()) return false;
+
+        switch (entity) {
+            case WanderingTraderEntity ignored when Configs.EntityAlerts.ENABLE_WANDERING_TRADER.getBooleanValue() -> {
+                return true;
+            }
+            case PillagerEntity ignored when Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() -> {
+                return true;
+            }
+            case FoxEntity fox when Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() -> {
+                return fox.getEquippedStack(EquipmentSlot.MAINHAND).isOf(Items.EMERALD);
+            }
+            case DrownedEntity drowned when Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() -> {
+                return drowned.getEquippedStack(EquipmentSlot.MAINHAND).isOf(Items.SNIFFER_EGG) || drowned.getEquippedStack(EquipmentSlot.OFFHAND).isOf(Items.SNIFFER_EGG);
+            }
+            default -> {
+                if (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue()) {
+                    String entityId = addDefaultPrefix(Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStringValue());
+                    return Registries.ENTITY_TYPE.getId(entity.getType()).toString().equalsIgnoreCase(entityId);
+                }
+            }
+        }
+        return false;
+    }
+
+    private static void triggerAlert(Entity entity) {
+        if (Configs.EntityAlerts.ENABLE_SOUND.getBooleanValue()) {
+            AlertSoundManager.play();
+        }
+        MessageOutputType mode = (MessageOutputType) Configs.EntityAlerts.NOTIFY_MODE.getOptionListValue();
+        if (mode == MessageOutputType.NONE) return;
+
+        Text msg = Text.translatable("glowtools.chat.entity_alerts.found",
+                Reference.chatPrefix, entity.getDisplayName(), formatPos(entity.getX(), entity.getY(), entity.getZ()));
+        MinecraftClient client = MinecraftClient.getInstance();
+
+        if (client.player != null) {
+            client.player.sendMessage(msg, mode == MessageOutputType.ACTIONBAR);
+        }
+
+        if (Configs.EntityAlerts.EXIT_WORLD.getBooleanValue()) {
+            client.execute(() -> {
+                if (client.world != null) {
+                    LocalTime currentTime = LocalTime.now();
+                    Text title = Text.translatable("glowtools.chat.entity_alerts.disconnect_title");
+                    Text reason =Text.literal("in " + currentTime.format(formatter) + "\nat " + formatPos(entity.getX(), entity.getY(), entity.getZ()));
+
+                    client.world.disconnect();
+                    client.disconnect(new DisconnectedScreen(new TitleScreen(), title, reason));
+                    //client.setScreen();
+                }
+            });
+        }
+    }
+
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+}
