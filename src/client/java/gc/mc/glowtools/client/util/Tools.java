@@ -6,4 +6,9 @@ public class Tools {
     public static String formatPos(Vec3d pos) {
         return String.format("%.1f, %.1f, %.1f", pos.x, pos.y, pos.z);
     }
+    public static String addDefaultPrefix(String id) {
+        if (id.isEmpty()) return id;
+        if (!id.contains(":")) id = "minecraft:" + id;
+        return id;
+    }
 }
