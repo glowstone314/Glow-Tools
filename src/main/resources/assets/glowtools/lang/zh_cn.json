@@ -87,6 +87,8 @@
   "glowtools.label.enchantments_filter_mode.mace": "重锤附魔",
 
   "glowtools.gui.button.config_gui.others": "其他功能",
+  "glowtools.config.others.name.openConfigGui": "打开配置界面",
+  "glowtools.config.others.comment.openConfigGui": "打开游戏内配置界面的快捷键",
   "glowtools.config.others.name.remindAfterPlayerRespawn": "玩家重生后提醒",
   "glowtools.config.others.comment.remindAfterPlayerRespawn": "玩家重生后提醒补充末影珍珠",
   "glowtools.chat.others.remindAfterPlayerRespawn": "%s§5你死了！记得补充末影珍珠！",
