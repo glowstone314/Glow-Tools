@@ -153,17 +153,20 @@ public class Configs implements IConfigHandler {
 
     public static class Others {
 
+        public static final ConfigHotkey            OPEN_CONFIG_GUI =               new ConfigHotkey(           "openConfigGui", "G,T", "").apply(OTHERS_KEY);
         public static final ConfigBooleanHotkeyed   REMIND_AFTER_PLAYER_RESPAWN =   new ConfigBooleanHotkeyed(  "remindAfterPlayerRespawn", false, "").apply(OTHERS_KEY);
         public static final ConfigOptionList        PLAYER_RESPAWN_REMIND_MODE =    new ConfigOptionList(       "playerRespawnRemindMode", MessageOutputType.MESSAGE).apply(OTHERS_KEY);
         public static final ConfigBooleanHotkeyed   TWEAKEROO_FAKE_SNEAK_MODIFY =   new ConfigBooleanHotkeyed(  "tweakerooFakeSneakModify", false, "").apply(OTHERS_KEY);
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
+                OPEN_CONFIG_GUI,
                 REMIND_AFTER_PLAYER_RESPAWN,
                 PLAYER_RESPAWN_REMIND_MODE,
                 TWEAKEROO_FAKE_SNEAK_MODIFY
         );
 
-        public static final ImmutableList<IHotkeyTogglable> HOTKEYS = ImmutableList.of(
+        public static final ImmutableList<IHotkey> HOTKEYS = ImmutableList.of(
+                OPEN_CONFIG_GUI,
                 REMIND_AFTER_PLAYER_RESPAWN,
                 TWEAKEROO_FAKE_SNEAK_MODIFY
         );
