@@ -88,6 +88,8 @@
   "glowtools.label.enchantments_filter_mode.spear": "Spear Enchantments",
 
   "glowtools.gui.button.config_gui.others": "Miscellaneous",
+  "glowtools.config.others.name.openConfigGui": "Open Config GUI",
+  "glowtools.config.others.comment.openConfigGui": "The key open the in-game config GUI",
   "glowtools.config.others.name.remindAfterPlayerRespawn": "Remind After Respawn",
   "glowtools.config.others.comment.remindAfterPlayerRespawn": "Remind player to restock Ender Pearls after dying.",
   "glowtools.chat.others.remindAfterPlayerRespawn": "%s§5You died! Don't forget to restock your Ender Pearls!",
