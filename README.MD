@@ -1,7 +1,7 @@
 # Glow Tools
 
-Glow Tools 是一款 Minecraft 辅助类模组，仅客户端安装。  
-Glow Tools is a client-side utility mod for Minecraft designed to streamline technical gameplay and resource management.
+Glow Tools 是一款 Minecraft 辅助类模组，仅客户端安装。默认按 G + T 打开配置页面。  
+Glow Tools is a client-side utility mod for Minecraft designed to streamline technical gameplay and resource management. By default, press G + T to open the config page.
 
 ## 功能 Features
 
