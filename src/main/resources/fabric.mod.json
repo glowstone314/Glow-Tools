@@ -37,7 +37,6 @@
     "fabricloader": ">=0.18.4",
     "fabric-api": "*",
     "minecraft": "1.21.11",
-    "malilib": ">=0.27.6",
-    "tweakeroo": ">=0.27.5"
+    "malilib": ">=0.27.6"
   }
 }
