@@ -1,6 +1,6 @@
 package gc.mc.glowtools.client.mixin;
 
-import fi.dy.masa.tweakeroo.config.FeatureToggle;
+import gc.mc.glowtools.client.compat.TweakerooCompatibility;
 import gc.mc.glowtools.client.config.Configs;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,15 +25,32 @@ public abstract class MixinPlayerEntity {
                 BlockPos landingPos = clientPlayer.getBlockPos().down(2);
                 return !isStandable(clientPlayer, landingPos);
             }
-            if (FeatureToggle.TWEAK_FAKE_SNEAKING.getBooleanValue()) return true;
+            if (TweakerooCompatibility.isTweakerooFakeSneakEnabled()) {
+                return true;
+            }
         }
         return this.clipAtLedge();
     }
 
     @Unique
     private boolean isStandable(ClientPlayerEntity player, BlockPos pos) {
-        VoxelShape shape = player.getWorld().getBlockState(pos).getCollisionShape(player.getWorld(), pos);
-        return !shape.isEmpty();
+        double playerY = player.getY();
+        BlockPos basePos = player.getBlockPos();
+
+        for (int yOffset = -1; yOffset >= -2; yOffset--) {
+            BlockPos checkPos = basePos.add(0, yOffset, 0);
+            VoxelShape shape = player.getWorld().getBlockState(checkPos).getCollisionShape(player.getWorld(), checkPos);
+
+            if (!shape.isEmpty()) {
+                double blockTopY = checkPos.getY() + shape.getMax(net.minecraft.util.math.Direction.Axis.Y);
+                double diff = playerY - blockTopY;
+                if (diff <= 1.25) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
     }
 
 }

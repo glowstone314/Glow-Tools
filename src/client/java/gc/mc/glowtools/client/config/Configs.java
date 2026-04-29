@@ -48,7 +48,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigOptionList        NOTIFY_MODE =               new ConfigOptionList(       "notifyMode", MessageOutputType.MESSAGE).apply(ENTITY_ALERT_KEY);
         public static final ConfigInteger           SOUND_INTERVAL_MS =         new ConfigInteger(          "soundIntervalMs", 300, 1, 600000).apply(ENTITY_ALERT_KEY);
         public static final ConfigInteger           SOUND_COUNT =               new ConfigInteger(          "soundCount", 3, 1, 32).apply(ENTITY_ALERT_KEY);
-        public static final ConfigString            CUSTOM_SOUND =              new ConfigString(           "customSound", "entity.generic.explode").apply(ENTITY_ALERT_KEY);
+        public static final ConfigString            CUSTOM_SOUND_ID =           new ConfigString(           "customSoundId", "entity.generic.explode").apply(ENTITY_ALERT_KEY);
+        public static final ConfigString            CUSTOM_SOUND_PATH =         new ConfigString(           "customSoundPath", "").apply(ENTITY_ALERT_KEY);
         public static final ConfigColor             GLOW_COLOR =                new ConfigColor(            "glowColor", "0xFFFFFF").apply(ENTITY_ALERT_KEY);
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
@@ -68,7 +69,8 @@ public class Configs implements IConfigHandler {
                 GLOW_COLOR,
                 SOUND_INTERVAL_MS,
                 SOUND_COUNT,
-                CUSTOM_SOUND
+                CUSTOM_SOUND_ID,
+                CUSTOM_SOUND_PATH
         );
 
         public static final ImmutableList<IHotkeyTogglable> HOTKEYS = ImmutableList.of(
