@@ -103,7 +103,9 @@ public class EntityAlertHandler {
 
                     client.level.disconnect(Component.empty());
                     client.disconnect(new DisconnectedScreen(new TitleScreen(), title, reason), true);
-                    //client.setScreen();
+
+                    Configs.EntityAlerts.EXIT_WORLD.setBooleanValue(false);
+                    Configs.saveToFile();
                 }
             });
         }

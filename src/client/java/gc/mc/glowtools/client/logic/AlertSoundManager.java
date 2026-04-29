@@ -21,13 +21,12 @@ public class AlertSoundManager {
             int count = Configs.EntityAlerts.SOUND_COUNT.getIntegerValue();
             int interval = Configs.EntityAlerts.SOUND_INTERVAL_MS.getIntegerValue();
             boolean isExternal = Configs.EntityAlerts.USE_EXTERNAL_SOUND.getBooleanValue();
-            String soundPath = Configs.EntityAlerts.CUSTOM_SOUND.getStringValue();
 
             for (int i = 0; i < count; i++) {
                 if (isExternal) {
-                    playExternal(soundPath);
+                    playExternal(Configs.EntityAlerts.CUSTOM_SOUND_PATH.getStringValue());
                 } else {
-                    playInternal(soundPath);
+                    playInternal(Configs.EntityAlerts.CUSTOM_SOUND_ID.getStringValue());
                 }
 
                 if (i < count - 1 && interval > 0) {

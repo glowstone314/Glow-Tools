@@ -26,7 +26,7 @@
   "glowtools.config.entity_alerts.name.useExternalSound": "Use External Sound",
   "glowtools.config.entity_alerts.comment.useExternalSound": "Whether to use an external sound file (bypasses Minecraft's volume sliders).",
   "glowtools.config.entity_alerts.name.exitWorld": "Auto Exit World",
-  "glowtools.config.entity_alerts.comment.exitWorld": "Automatically disconnect/exit the world when a target entity spawns.",
+  "glowtools.config.entity_alerts.comment.exitWorld": "Automatically disconnect/exit the world when a target entity spawns.\nAutomatically turn off this feature after triggering",
   "glowtools.chat.entity_alerts.disconnect_title": "Target entity spawned. Disconnected automatically.",
   "glowtools.config.entity_alerts.name.enableGlow": "Enable Glow Effect",
   "glowtools.config.entity_alerts.comment.enableGlow": "Give a glowing effect to entities that trigger the alert.",
@@ -36,8 +36,10 @@
   "glowtools.config.entity_alerts.comment.soundIntervalMs": "Interval between multiple sound playbacks (in milliseconds).",
   "glowtools.config.entity_alerts.name.soundCount": "Sound Count",
   "glowtools.config.entity_alerts.comment.soundCount": "How many times to play the sound when an entity spawns.",
-  "glowtools.config.entity_alerts.name.customSound": "Custom Sound Path/ID",
-  "glowtools.config.entity_alerts.comment.customSound": "Internal: Sound ID (e.g., entity.experience_orb.pickup)\nExternal: Full path to a .wav file.",
+  "glowtools.config.entity_alerts.name.customSoundId": "Custom sound id",
+  "glowtools.config.entity_alerts.comment.customSoundId": "Custom sound id when using internal sound",
+  "glowtools.config.entity_alerts.name.customSoundPath": "Custom sound path",
+  "glowtools.config.entity_alerts.comment.customSoundPath": "Custom .wav sound file path when using external sound",
 
   "glowtools.gui.button.config_gui.tropical_fish": "Rare Tropical Fish Alert",
   "glowtools.config.tropical_fish.name.enableTropicalFishAlerts": "Enable Rare Tropical Fish Alerts",
@@ -95,6 +97,6 @@
   "glowtools.chat.others.remindAfterPlayerRespawn": "%s§5You died! Don't forget to restock your Ender Pearls!",
   "glowtools.config.others.name.playerRespawnRemindMode": "Respawn Notification Position",
   "glowtools.config.others.comment.playerRespawnRemindMode": "Where the respawn reminder should be displayed.",
-  "glowtools.config.others.name.tweakerooFakeSneakModify": "Enhanced Fake Sneak",
-  "glowtools.config.others.comment.tweakerooFakeSneakModify": "Modifies Tweakeroo's Fake Sneak to allow movement if a standable block exists at y-2."
+  "glowtools.config.others.name.tweakerooFakeSneakModify": "Modified Fake Sneak",
+  "glowtools.config.others.comment.tweakerooFakeSneakModify": "When the drop does not exceed 1.25 blocks, players are allowed to move forward."
 }

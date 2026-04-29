@@ -2,10 +2,11 @@ package gc.mc.glowtools.client.mixin;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import fi.dy.masa.tweakeroo.config.FeatureToggle;
+import gc.mc.glowtools.client.compat.TweakerooCompatibility;
 import gc.mc.glowtools.client.config.Configs;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,15 +32,32 @@ public abstract class MixinPlayerEntity {
                 BlockPos landingPos = new BlockPos(clientPlayer.getBlockX(), clientPlayer.getBlockY(), clientPlayer.getBlockZ()).below(2);
                 return !isStandable(clientPlayer, landingPos);
             }
-            if (FeatureToggle.TWEAK_FAKE_SNEAKING.getBooleanValue()) return true;
+            if (TweakerooCompatibility.isTweakerooFakeSneakEnabled()) {
+                return true;
+            }
         }
         return original.call(instance);
     }
 
     @Unique
     private boolean isStandable(LocalPlayer player, BlockPos pos) {
-        VoxelShape shape = player.level().getBlockState(pos).getCollisionShape(player.level(), pos);
-        return !shape.isEmpty();
+        double playerY = player.getY();
+        BlockPos basePos = new BlockPos(player.getBlockX(), player.getBlockY(), player.getBlockZ());
+
+        for (int yOffset = -1; yOffset >= -2; yOffset--) {
+            BlockPos checkPos = basePos.offset(0, yOffset, 0);
+            VoxelShape shape = player.level().getBlockState(checkPos).getCollisionShape(player.level(), checkPos);
+
+            if (!shape.isEmpty()) {
+                double blockTopY = checkPos.getY() + shape.max(Direction.Axis.Y);
+                double diff = playerY - blockTopY;
+                if (diff <= 1.25) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
     }
 
 }
