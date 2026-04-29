@@ -1,7 +1,7 @@
 # Glow Tools
 
-Glow Tools 是一款 Minecraft 辅助类模组，仅客户端安装。  
-Glow Tools is a client-side utility mod for Minecraft designed to streamline technical gameplay and resource management.
+Glow Tools 是一款 Minecraft 辅助类模组，仅客户端安装。默认按 G + T 打开配置页面。  
+Glow Tools is a client-side utility mod for Minecraft designed to streamline technical gameplay and resource management. By default, press G + T to open the config page.
 
 ## 功能 Features
 
@@ -56,11 +56,9 @@ A powerful tool for organizing fishing loot or massive chest hauls, allowing you
 * 玩家死亡提醒：当玩家死亡，提醒玩家补充末影珍珠。  
 * Death Reminder: Sends a notification after respawning to remind you to restock Ender Pearls.
 
-* 伪潜行修改：将 Tweakeroo 中的伪潜行功能修改为：在仅有一格落差时允许玩家前进。  
-* Enhanced Fake Sneak: Modifies Tweakeroo's "Fake Sneak" functionality to allow players to walk off a ledge if there is only a 1-block height difference.
+* 修改版伪潜行：在有不超过 1.25 格落差时允许玩家前进。
+* Modified Fake Sneak: When the drop does not exceed 1.25 blocks, players are allowed to move forward.
 
 ## 前置模组 Dependencies
 
 [malilib](https://github.com/sakura-ryoko/malilib)
-
-[tweakeroo](https://github.com/sakura-ryoko/tweakeroo)
