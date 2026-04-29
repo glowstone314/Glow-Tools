@@ -3,7 +3,6 @@ package gc.mc.glowtools.client.logic;
 import gc.mc.glowtools.client.config.Configs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.entity.Entity;
 import net.minecraft.registry.Registries;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -22,13 +21,12 @@ public class AlertSoundManager {
             int count = Configs.EntityAlerts.SOUND_COUNT.getIntegerValue();
             int interval = Configs.EntityAlerts.SOUND_INTERVAL_MS.getIntegerValue();
             boolean isExternal = Configs.EntityAlerts.USE_EXTERNAL_SOUND.getBooleanValue();
-            String soundPath = Configs.EntityAlerts.CUSTOM_SOUND.getStringValue();
 
             for (int i = 0; i < count; i++) {
                 if (isExternal) {
-                    playExternal(soundPath);
+                    playExternal(Configs.EntityAlerts.CUSTOM_SOUND_PATH.getStringValue());
                 } else {
-                    playInternal(soundPath);
+                    playInternal(Configs.EntityAlerts.CUSTOM_SOUND_ID.getStringValue());
                 }
 
                 if (i < count - 1 && interval > 0) {
