@@ -84,7 +84,6 @@ public class EntityAlertHandler {
         }
 
         if (Configs.EntityAlerts.EXIT_WORLD.getBooleanValue()) {
-            // todo 触发后自动将配置改为否
             client.execute(() -> {
                 if (client.world != null) {
                     LocalTime currentTime = LocalTime.now();
@@ -94,6 +93,9 @@ public class EntityAlertHandler {
                     client.world.disconnect();
                     client.disconnect();
                     client.setScreen(new DisconnectedScreen(new TitleScreen(), title, reason));
+
+                    Configs.EntityAlerts.EXIT_WORLD.setBooleanValue(false);
+                    Configs.saveToFile();
                 }
             });
         }

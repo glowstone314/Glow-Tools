@@ -76,9 +76,12 @@ public class Configs implements IConfigHandler {
         public static final ConfigInteger           SOUND_COUNT =               new ConfigInteger(
                 StringUtils.translate("glowtools.config.entity_alerts.name.soundCount"), 3, 1, 32,
                 StringUtils.translate("glowtools.config.entity_alerts.comment.soundCount"));
-        public static final ConfigString            CUSTOM_SOUND =              new ConfigString(
-                StringUtils.translate("glowtools.config.entity_alerts.name.customSound"), "entity.generic.explode",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.customSound"));
+        public static final ConfigString            CUSTOM_SOUND_ID =              new ConfigString(
+                StringUtils.translate("glowtools.config.entity_alerts.name.customSoundId"), "entity.generic.explode",
+                StringUtils.translate("glowtools.config.entity_alerts.comment.customSoundId"));
+        public static final ConfigString            CUSTOM_SOUND_PATH =              new ConfigString(
+                StringUtils.translate("glowtools.config.entity_alerts.name.customSoundPath"), "",
+                StringUtils.translate("glowtools.config.entity_alerts.comment.customSoundPath"));
         public static final ConfigColor             GLOW_COLOR =                new ConfigColor(
                 StringUtils.translate("glowtools.config.entity_alerts.name.glowColor"), "0xFFFFFF",
                 StringUtils.translate("glowtools.config.entity_alerts.comment.glowColor"));
@@ -100,7 +103,8 @@ public class Configs implements IConfigHandler {
                 GLOW_COLOR,
                 SOUND_INTERVAL_MS,
                 SOUND_COUNT,
-                CUSTOM_SOUND
+                CUSTOM_SOUND_ID,
+                CUSTOM_SOUND_PATH
         );
 
         public static final ImmutableList<IHotkeyTogglable> HOTKEYS = ImmutableList.of(
