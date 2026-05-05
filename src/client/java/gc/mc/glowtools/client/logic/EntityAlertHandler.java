@@ -15,15 +15,16 @@ import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.WanderingTraderEntity;
 import net.minecraft.entity.mob.DrownedEntity;
 import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import static gc.mc.glowtools.client.util.Tools.containsEntityId;
 import static gc.mc.glowtools.client.util.Tools.formatPos;
 
 public class EntityAlertHandler {
@@ -64,10 +65,8 @@ public class EntityAlertHandler {
             }
             default -> {
                 if (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue()) {
-                    String entityId = Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStringValue();
-                    if (entityId.isEmpty()) return false;
-                    if (!entityId.contains(":")) entityId = "minecraft:" + entityId;
-                    return Registries.ENTITY_TYPE.getId(entity.getType()).toString().equalsIgnoreCase(entityId);
+                    List<String> entityIds = Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStrings();
+                    if (containsEntityId(entity, entityIds)) return true;
                 }
             }
         }
