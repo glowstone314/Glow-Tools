@@ -12,7 +12,7 @@ import fi.dy.masa.malilib.hotkeys.IHotkey;
 import fi.dy.masa.malilib.hotkeys.KeyAction;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.util.FileUtils;
-import fi.dy.masa.malilib.util.JsonUtils;
+import fi.dy.masa.malilib.util.data.json.JsonUtils;
 import fi.dy.masa.malilib.util.MessageOutputType;
 import gc.mc.glowtools.client.Reference;
 
@@ -39,7 +39,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed   ENABLE_FOX_EMERALD =        new ConfigBooleanHotkeyed(  "enableFoxEmerald", false, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_DROWNED_SNIFFER =    new ConfigBooleanHotkeyed(  "enableDrownedSniffer", false, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_CUSTOM_ENTITY =      new ConfigBooleanHotkeyed(  "enableCustomEntity", false, "").apply(ENTITY_ALERT_KEY);
-        public static final ConfigString            CUSTOM_ENTITY_ID =          new ConfigString(           "customEntityId", "").apply(ENTITY_ALERT_KEY);
+        public static final ConfigStringList        CUSTOM_ENTITY_ID =          new ConfigStringList(       "customEntityId", ImmutableList.of()).apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   IGNORE_NAMED_ENTITIES =     new ConfigBooleanHotkeyed(  "ignoreNamedEntities", true, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_SOUND =              new ConfigBooleanHotkeyed(  "enableSound", true, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_GLOW =               new ConfigBooleanHotkeyed(  "enableGlow", true, "").apply(ENTITY_ALERT_KEY);
@@ -179,7 +179,7 @@ public class Configs implements IConfigHandler {
         Path configFile = FileUtils.getConfigDirectoryAsPath().resolve(CONFIG_FILE_NAME);
 
         if (Files.exists(configFile) && Files.isReadable(configFile)) {
-            JsonElement element = JsonUtils.parseJsonFileAsPath(configFile);
+            JsonElement element = JsonUtils.parseJsonFile(configFile);
 
             if (element != null && element.isJsonObject()) {
                 JsonObject root = element.getAsJsonObject();
@@ -207,7 +207,7 @@ public class Configs implements IConfigHandler {
             ConfigUtils.writeConfigBase(root, "TransferEnchanted", Configs.TransferEnchanted.OPTIONS);
             ConfigUtils.writeConfigBase(root, "Others", Configs.Others.OPTIONS);
 
-            JsonUtils.writeJsonToFileAsPath(root, dir.resolve(CONFIG_FILE_NAME));
+            JsonUtils.writeJsonToFile(root, dir.resolve(CONFIG_FILE_NAME));
         }
     }
 
