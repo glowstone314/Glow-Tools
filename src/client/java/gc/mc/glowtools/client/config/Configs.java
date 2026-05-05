@@ -18,8 +18,6 @@ import fi.dy.masa.malilib.util.StringUtils;
 import gc.mc.glowtools.client.Reference;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class Configs implements IConfigHandler {
 
@@ -49,8 +47,8 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed   ENABLE_CUSTOM_ENTITY =      new ConfigBooleanHotkeyed(
                 StringUtils.translate("glowtools.config.entity_alerts.name.enableCustomEntity"), false, "",
                 StringUtils.translate("glowtools.config.entity_alerts.comment.enableCustomEntity"));
-        public static final ConfigString            CUSTOM_ENTITY_ID =          new ConfigString(
-                StringUtils.translate("glowtools.config.entity_alerts.name.customEntityId"), "",
+        public static final ConfigStringList        CUSTOM_ENTITY_ID =          new ConfigStringList(
+                StringUtils.translate("glowtools.config.entity_alerts.name.customEntityId"), ImmutableList.of(),
                 StringUtils.translate("glowtools.config.entity_alerts.comment.customEntityId"));
         public static final ConfigBooleanHotkeyed   IGNORE_NAMED_ENTITIES =     new ConfigBooleanHotkeyed(
                 StringUtils.translate("glowtools.config.entity_alerts.name.ignoreNamedEntities"), true, "",
