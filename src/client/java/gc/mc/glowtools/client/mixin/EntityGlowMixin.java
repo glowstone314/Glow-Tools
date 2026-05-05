@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
 import static gc.mc.glowtools.client.util.Tools.addDefaultPrefix;
+import static gc.mc.glowtools.client.util.Tools.containsEntityId;
 
 @Mixin(Entity.class)
 public abstract class EntityGlowMixin {
@@ -33,16 +34,12 @@ public abstract class EntityGlowMixin {
         Entity entity = (Entity) (Object) this;
         if (Configs.EntityAlerts.ENABLE_ALERTS.getBooleanValue() && Configs.EntityAlerts.ENABLE_GLOW.getBooleanValue()) {
             if (EntityAlertHandler.isTargetEntity(entity)) {
-                Identifier identifier = Identifier.parse(addDefaultPrefix(Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStringValue()));
-                EntityType<?> entityType = client.level.registryAccess().lookupOrThrow(Registries.ENTITY_TYPE).getValue(identifier);
-                if ((entityType != null) && (
-                        (Configs.EntityAlerts.ENABLE_WANDERING_TRADER.getBooleanValue() && entity instanceof WanderingTrader) ||
-                                (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof Pillager) ||
-                                (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof Fox) ||
-                                (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof Drowned) ||
-                                (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() &&
-                                        Objects.equals(entityType, entity.getType())))
-                ) {
+                if ((Configs.EntityAlerts.ENABLE_WANDERING_TRADER.getBooleanValue() && entity instanceof WanderingTrader) ||
+                        (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof Pillager) ||
+                        (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof Fox) ||
+                        (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof Drowned) ||
+                        (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() &&
+                                containsEntityId(entity, Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStrings(), client))) {
                     cir.setReturnValue(true);
                     b = false;
                 }
@@ -66,16 +63,12 @@ public abstract class EntityGlowMixin {
         Entity entity = (Entity) (Object) this;
         if (Configs.EntityAlerts.ENABLE_ALERTS.getBooleanValue() && Configs.EntityAlerts.ENABLE_GLOW.getBooleanValue()) {
             if (EntityAlertHandler.isTargetEntity(entity)) {
-                Identifier identifier = Identifier.parse(addDefaultPrefix(Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStringValue()));
-                EntityType<?> entityType = client.level.registryAccess().lookupOrThrow(Registries.ENTITY_TYPE).getValue(identifier);
-                if ((entityType != null) && (
-                        (Configs.EntityAlerts.ENABLE_WANDERING_TRADER.getBooleanValue() && entity instanceof WanderingTrader) ||
-                                (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof Pillager) ||
-                                (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof Fox) ||
-                                (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof Drowned) ||
-                                (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() &&
-                                        Objects.equals(entityType, entity.getType())))
-                ) {
+                if ((Configs.EntityAlerts.ENABLE_WANDERING_TRADER.getBooleanValue() && entity instanceof WanderingTrader) ||
+                        (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof Pillager) ||
+                        (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof Fox) ||
+                        (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof Drowned) ||
+                        (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() &&
+                                containsEntityId(entity, Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStrings(), client))) {
                     cir.setReturnValue(Configs.EntityAlerts.GLOW_COLOR.getIntegerValue());
                 }
             }

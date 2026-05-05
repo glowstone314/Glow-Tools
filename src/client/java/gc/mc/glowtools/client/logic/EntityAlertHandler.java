@@ -65,11 +65,8 @@ public class EntityAlertHandler {
             }
             default -> {
                 if (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue()) {
-                    String entityId = Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStringValue();
-                    if (entityId.isEmpty()) return false;
-                    entityId = addDefaultPrefix(entityId);
-                    Identifier identifier = Identifier.parse(entityId);
-                    return Objects.equals(client.level.registryAccess().lookupOrThrow(Registries.ENTITY_TYPE).getValue(identifier), entity.getType());
+                    List<String> entityIds = Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStrings();
+                    if (containsEntityId(entity, entityIds, client)) return true;
                 }
             }
         }

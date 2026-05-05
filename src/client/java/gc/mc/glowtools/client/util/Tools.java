@@ -1,11 +1,15 @@
 package gc.mc.glowtools.client.util;
 
+import gc.mc.glowtools.client.config.Configs;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Tools {
     public static String formatPos(Vec3 pos) {
@@ -26,5 +30,15 @@ public class Tools {
         Vec3 pos = client.player.position();
         AABB searchArea = AABB.ofSize(pos, radius * 2, radius * 2, radius * 2);
         return client.level.getEntities(null, searchArea);
+    }
+    public static boolean containsEntityId(Entity entity, List<String> ids, Minecraft client) {
+        if (ids.isEmpty()) return false;
+        for (String entityId : ids) {
+            entityId = addDefaultPrefix(entityId);
+            Identifier identifier = Identifier.parse(entityId);
+            if (Objects.equals(client.level.registryAccess().lookupOrThrow(Registries.ENTITY_TYPE).getValue(identifier), entity.getType()))
+                return true;
+        }
+        return false;
     }
 }
