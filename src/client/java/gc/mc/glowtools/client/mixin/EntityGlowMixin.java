@@ -5,13 +5,12 @@ import gc.mc.glowtools.client.logic.EntityAlertHandler;
 import gc.mc.glowtools.client.logic.TropicalFishHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.TropicalFishEntity;
-import net.minecraft.registry.Registries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import static gc.mc.glowtools.client.util.Tools.addDefaultPrefix;
+import static gc.mc.glowtools.client.util.Tools.containsEntityId;
 
 @Mixin(Entity.class)
 public abstract class EntityGlowMixin {
@@ -26,7 +25,7 @@ public abstract class EntityGlowMixin {
                         (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.PillagerEntity) ||
                         (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof net.minecraft.entity.passive.FoxEntity) ||
                         (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.DrownedEntity) ||
-                        (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() && addDefaultPrefix(Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStringValue()).equals(Registries.ENTITY_TYPE.getId(entity.getType()).toString()))) {
+                        (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() && containsEntityId(entity, Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStrings()))) {
                     cir.setReturnValue(true);
                     b = false;
                 }
@@ -52,7 +51,7 @@ public abstract class EntityGlowMixin {
                         (Configs.EntityAlerts.ENABLE_PILLAGER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.PillagerEntity) ||
                         (Configs.EntityAlerts.ENABLE_FOX_EMERALD.getBooleanValue() && entity instanceof net.minecraft.entity.passive.FoxEntity) ||
                         (Configs.EntityAlerts.ENABLE_DROWNED_SNIFFER.getBooleanValue() && entity instanceof net.minecraft.entity.mob.DrownedEntity) ||
-                        (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() && addDefaultPrefix(Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStringValue()).equals(Registries.ENTITY_TYPE.getId(entity.getType()).toString()))) {
+                        (Configs.EntityAlerts.ENABLE_CUSTOM_ENTITY.getBooleanValue() && containsEntityId(entity, Configs.EntityAlerts.CUSTOM_ENTITY_ID.getStrings()))) {
                     cir.setReturnValue(Configs.EntityAlerts.GLOW_COLOR.getIntegerValue());
                 }
             }
