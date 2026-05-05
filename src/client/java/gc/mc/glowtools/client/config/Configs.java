@@ -39,7 +39,7 @@ public class Configs implements IConfigHandler {
         public static final ConfigBooleanHotkeyed   ENABLE_FOX_EMERALD =        new ConfigBooleanHotkeyed(  "enableFoxEmerald", false, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_DROWNED_SNIFFER =    new ConfigBooleanHotkeyed(  "enableDrownedSniffer", false, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_CUSTOM_ENTITY =      new ConfigBooleanHotkeyed(  "enableCustomEntity", false, "").apply(ENTITY_ALERT_KEY);
-        public static final ConfigString            CUSTOM_ENTITY_ID =          new ConfigString(           "customEntityId", "").apply(ENTITY_ALERT_KEY);
+        public static final ConfigStringList        CUSTOM_ENTITY_ID =          new ConfigStringList(       "customEntityId", ImmutableList.of()).apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   IGNORE_NAMED_ENTITIES =     new ConfigBooleanHotkeyed(  "ignoreNamedEntities", true, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_SOUND =              new ConfigBooleanHotkeyed(  "enableSound", true, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_GLOW =               new ConfigBooleanHotkeyed(  "enableGlow", true, "").apply(ENTITY_ALERT_KEY);
