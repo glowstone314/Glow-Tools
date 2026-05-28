@@ -14,7 +14,6 @@ import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.JsonUtils;
 import fi.dy.masa.malilib.util.MessageOutputType;
-import fi.dy.masa.malilib.util.StringUtils;
 import gc.mc.glowtools.client.Reference;
 
 import java.io.File;
@@ -30,59 +29,59 @@ public class Configs implements IConfigHandler {
     public static class EntityAlerts {
 
         public static final ConfigBooleanHotkeyed   ENABLE_ALERTS =             new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enableAlerts"), false, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enableAlerts"));
+                "Enable Entity Spawn Alerts", false, "",
+                "Alert when specified entities spawn.");
         public static final ConfigBooleanHotkeyed   ENABLE_WANDERING_TRADER =   new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enableWanderingTrader"), true, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enableWanderingTrader"));
+                "Wandering Trader", true, "",
+                "Alert when a Wandering Trader spawns.");
         public static final ConfigBooleanHotkeyed   ENABLE_PILLAGER =           new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enablePillager"), false, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enablePillager"));
+                "Pillager", false, "",
+                "Alert when a Pillager spawns.");
         public static final ConfigBooleanHotkeyed   ENABLE_FOX_EMERALD =        new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enableFoxEmerald"), false, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enableFoxEmerald"));
+                "Fox with Emerald", false, "",
+                "Alert when a Fox holding an Emerald spawns.");
         public static final ConfigBooleanHotkeyed   ENABLE_DROWNED_SNIFFER =    new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enableDrownedSniffer"), false, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enableDrownedSniffer"));
+                "Drowned with Sniffer Egg", false, "",
+                "Alert when a Drowned holding a Sniffer Egg spawns.");
         public static final ConfigBooleanHotkeyed   ENABLE_CUSTOM_ENTITY =      new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enableCustomEntity"), false, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enableCustomEntity"));
+                "Custom Entity", false, "",
+                "Alert when a custom entity spawns.");
         public static final ConfigStringList        CUSTOM_ENTITY_ID =          new ConfigStringList(
-                StringUtils.translate("glowtools.config.entity_alerts.name.customEntityId"), ImmutableList.of(),
-                StringUtils.translate("glowtools.config.entity_alerts.comment.customEntityId"));
+                "Custom Entity ID", ImmutableList.of(),
+                "The ID of the custom entity to alert for.");
         public static final ConfigBooleanHotkeyed   IGNORE_NAMED_ENTITIES =     new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.ignoreNamedEntities"), true, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.ignoreNamedEntities"));
+                "Ignore Named Entities", true, "",
+                "Do not alert if the entity has a custom name.");
         public static final ConfigBooleanHotkeyed   ENABLE_SOUND =              new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enableSound"), true, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enableSound"));
+                "Enable Sound Alert", true, "",
+                "Play a sound alert when an entity spawns.");
         public static final ConfigBooleanHotkeyed   ENABLE_GLOW =               new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.enableGlow"), true, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.enableGlow"));
+                "Enable Glow Effect", true, "",
+                "Give a glowing effect to entities that trigger the alert.");
         public static final ConfigBooleanHotkeyed   USE_EXTERNAL_SOUND =        new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.useExternalSound"), false, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.useExternalSound"));
+                "Use External Sound", false, "",
+                "Whether to use an external sound file (bypasses Minecraft's volume sliders).");
         public static final ConfigBooleanHotkeyed   EXIT_WORLD =                new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.entity_alerts.name.exitWorld"), false, "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.exitWorld"));
+                "Auto Exit World", false, "",
+                "Automatically disconnect/exit the world when a target entity spawns.\nAutomatically turn off this feature after triggering");
         public static final ConfigOptionList        NOTIFY_MODE =               new ConfigOptionList(
-                StringUtils.translate("glowtools.config.entity_alerts.name.notifyMode"), MessageOutputType.MESSAGE,
-                StringUtils.translate("glowtools.config.entity_alerts.comment.notifyMode"));
+                "Notification Position", MessageOutputType.MESSAGE,
+                "Where the entity spawn alerts should be displayed.");
         public static final ConfigInteger           SOUND_INTERVAL_MS =         new ConfigInteger(
-                StringUtils.translate("glowtools.config.entity_alerts.name.soundIntervalMs"), 300, 1, 600000,
-                StringUtils.translate("glowtools.config.entity_alerts.comment.soundIntervalMs"));
+                "Sound Interval (ms)", 300, 1, 600000,
+                "Interval between multiple sound playbacks (in milliseconds).");
         public static final ConfigInteger           SOUND_COUNT =               new ConfigInteger(
-                StringUtils.translate("glowtools.config.entity_alerts.name.soundCount"), 3, 1, 32,
-                StringUtils.translate("glowtools.config.entity_alerts.comment.soundCount"));
+                "Sound Count", 3, 1, 32,
+                "How many times to play the sound when an entity spawns.");
         public static final ConfigString            CUSTOM_SOUND_ID =              new ConfigString(
-                StringUtils.translate("glowtools.config.entity_alerts.name.customSoundId"), "entity.generic.explode",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.customSoundId"));
+                "Custom sound id", "entity.generic.explode",
+                "Custom sound id when using internal sound");
         public static final ConfigString            CUSTOM_SOUND_PATH =              new ConfigString(
-                StringUtils.translate("glowtools.config.entity_alerts.name.customSoundPath"), "",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.customSoundPath"));
+                "Custom sound path", "",
+                "Custom .wav sound file path when using external sound");
         public static final ConfigColor             GLOW_COLOR =                new ConfigColor(
-                StringUtils.translate("glowtools.config.entity_alerts.name.glowColor"), "0xFFFFFF",
-                StringUtils.translate("glowtools.config.entity_alerts.comment.glowColor"));
+                "Glow Color", "0xFFFFFF",
+                "The color used for the entity glow effect.");
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 ENABLE_ALERTS,
@@ -124,20 +123,20 @@ public class Configs implements IConfigHandler {
     public static class TropicalFish {
 
         public static final ConfigBooleanHotkeyed   ENABLE_TROPICAL_FISH_ALERTS =   new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.tropical_fish.name.enableTropicalFishAlerts"), false, "",
-                StringUtils.translate("glowtools.config.tropical_fish.comment.enableTropicalFishAlerts"));
+                "Enable Rare Tropical Fish Alerts", false, "",
+                "Alert when a rare tropical fish spawns.");
         public static final ConfigOptionList        NOTIFY_MODE =                   new ConfigOptionList(
-                StringUtils.translate("glowtools.config.tropical_fish.name.notifyMode"), MessageOutputType.MESSAGE,
-                StringUtils.translate("glowtools.config.tropical_fish.comment.notifyMode"));
+                "Notification Position", MessageOutputType.MESSAGE,
+                "Where the rare tropical fish alerts should be displayed.");
         public static final ConfigBooleanHotkeyed   IGNORE_FROM_BUCKET =            new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.tropical_fish.name.ignoreFromBucket"), true, "",
-                StringUtils.translate("glowtools.config.tropical_fish.comment.ignoreFromBucket"));
+                "Ignore Bucket Release", true, "",
+                "Do not alert for tropical fish released from buckets.");
         public static final ConfigBooleanHotkeyed   ENABLE_GLOW =                   new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.tropical_fish.name.enableGlow"), true, "",
-                StringUtils.translate("glowtools.config.tropical_fish.comment.enableGlow"));
+                "Enable Glow Effect", true, "",
+                "Give a glowing effect to rare tropical fish.");
         public static final ConfigColor             GLOW_COLOR =                    new ConfigColor(
-                StringUtils.translate("glowtools.config.tropical_fish.name.glowColor"), "0xFFFFFF",
-                StringUtils.translate("glowtools.config.tropical_fish.comment.glowColor"));
+                "Glow Color", "0xFFFFFF",
+                "The color used for the rare tropical fish glow.");
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 ENABLE_TROPICAL_FISH_ALERTS,
@@ -158,35 +157,35 @@ public class Configs implements IConfigHandler {
     public static class TransferEnchanted {
 
         public static final ConfigHotkey            TRANSFER_HOTKEY =       new ConfigHotkey(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.transferHotkey"), "", ANY,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.transferHotkey"));
+                "Transfer Hotkey", "", ANY,
+                "Hotkey to transfer matching items from container to player inventory.");
         public static final ConfigOptionList        FILTER_MODE =           new ConfigOptionList(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.filterMode"), EnchantmentsFilterMode.ALL,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.filterMode"));
+                "Filter Mode", EnchantmentsFilterMode.ALL,
+                "The criteria used for filtering enchanted items.");
         public static final ConfigHotkey            CYCLE_FILTER_MODE =     new ConfigHotkey(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.cycleFilterMode"), "", ANY,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.cycleFilterMode"));
+                "Cycle Filter Mode", "", ANY,
+                "Hotkey to cycle through different enchantment filter modes.");
         public static final ConfigBooleanHotkeyed   ONLY_MAX_LEVEL =        new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.onlyMaxLevel"), true, "", ANY, null,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.onlyMaxLevel"));
+                "Max Level Only", true, "", ANY,
+                "Only transfer items containing max-level enchantments (excluding Swift Sneak).",null);
         public static final ConfigBooleanHotkeyed   EXCLUDE_CURSED =        new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.excludeCursed"), true, "", ANY, null,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.excludeCursed"));
+                "Exclude Curses", true, "", ANY,
+                "Do not transfer items with any cursed enchantments.", null);
         public static final ConfigBooleanHotkeyed   INVERT_FILTER =         new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.invertFilter"), false, "", ANY, null,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.invertFilter"));
+                "Invert Filter", false, "", ANY,
+                "Inverts the selection criteria for item transfer.", null);
         public static final ConfigBooleanHotkeyed   TRANSFER_BOOK =         new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.transferBook"), true, "", ANY, null,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.transferBook"));
+                "Transfer Books", true, "", ANY,
+                "Whether to transfer Enchanted Books.", null);
         public static final ConfigBooleanHotkeyed   TRANSFER_BOW =          new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.transferBow"), false, "", ANY, null,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.transferBow"));
+                "Transfer Bows", false, "", ANY,
+                "Whether to transfer enchanted Bows.", null);
         public static final ConfigBooleanHotkeyed   TRANSFER_FISHING_ROD =  new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.transferFishingRod"), false, "", ANY, null,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.transferFishingRod"));
+                "Transfer Fishing Rods", false, "", ANY,
+                "Whether to transfer enchanted Fishing Rods.", null);
         public static final ConfigBooleanHotkeyed   TRANSFER_ALL =          new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.transfer_enchanted.name.transferAll"), false, "", ANY, null,
-                StringUtils.translate("glowtools.config.transfer_enchanted.comment.transferAll"));
+                "Transfer All Types", false, "", ANY,
+                "Transfer all enchanted items (Overrides specific item type settings).", null);
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 TRANSFER_HOTKEY,
@@ -218,17 +217,17 @@ public class Configs implements IConfigHandler {
     public static class Others {
 
         public static final ConfigHotkey            OPEN_CONFIG_GUI =              new ConfigHotkey(
-                StringUtils.translate("glowtools.config.others.name.openConfigGui"), "G,T",
-                StringUtils.translate("glowtools.config.others.comment.openConfigGui"));
+                "Open Config GUI", "G,T",
+                "The key open the in-game config GUI");
         public static final ConfigBooleanHotkeyed   REMIND_AFTER_PLAYER_RESPAWN =   new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.others.name.remindAfterPlayerRespawn"), false, "",
-                StringUtils.translate("glowtools.config.others.comment.remindAfterPlayerRespawn"));
+                "Remind After Respawn", false, "",
+                "Remind player to restock Ender Pearls after dying.");
         public static final ConfigOptionList        PLAYER_RESPAWN_REMIND_MODE =    new ConfigOptionList(
-                StringUtils.translate("glowtools.config.others.name.playerRespawnRemindMode"), MessageOutputType.MESSAGE,
-                StringUtils.translate("glowtools.config.others.comment.playerRespawnRemindMode"));
+                "Respawn Notification Position", MessageOutputType.MESSAGE,
+                "Where the respawn reminder should be displayed.");
         public static final ConfigBooleanHotkeyed   TWEAKEROO_FAKE_SNEAK_MODIFY =   new ConfigBooleanHotkeyed(
-                StringUtils.translate("glowtools.config.others.name.tweakerooFakeSneakModify"), false, "",
-                StringUtils.translate("glowtools.config.others.comment.tweakerooFakeSneakModify"));
+                "Modified Fake Sneak", false, "",
+                "When the drop does not exceed 1.25 blocks, players are allowed to move forward.");
 
         public static final ImmutableList<IConfigBase> OPTIONS = ImmutableList.of(
                 OPEN_CONFIG_GUI,
