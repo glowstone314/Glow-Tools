@@ -33,7 +33,7 @@ public class Configs implements IConfigHandler {
 
     public static class EntityAlerts {
 
-        public static final ConfigBooleanHotkeyed   ENABLE_ALERTS =             new ConfigBooleanHotkeyed(  "enableAlerts", true, "").apply(ENTITY_ALERT_KEY);
+        public static final ConfigBooleanHotkeyed   ENABLE_ALERTS =             new ConfigBooleanHotkeyed(  "enableAlerts", false, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_WANDERING_TRADER =   new ConfigBooleanHotkeyed(  "enableWanderingTrader", true, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_PILLAGER =           new ConfigBooleanHotkeyed(  "enablePillager", false, "").apply(ENTITY_ALERT_KEY);
         public static final ConfigBooleanHotkeyed   ENABLE_FOX_EMERALD =        new ConfigBooleanHotkeyed(  "enableFoxEmerald", false, "").apply(ENTITY_ALERT_KEY);
