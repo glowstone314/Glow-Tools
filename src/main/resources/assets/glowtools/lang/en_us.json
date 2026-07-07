@@ -123,6 +123,7 @@
 
   "glowtools.warning.schematic_generator.requireLitematica": "This feature requires Litematica!",
   "glowtools.warning.schematic_generator.downloadLitematica": "Download Litematica (Modrinth)",
+  "glowtools.warning.schematic_generator.litematicaVersion": "The current version of Litematica has security vulnerabilities, Please update!",
 
   "glowtools.error.schematic_generator.blockEmpty": "The block can't be empty",
   "glowtools.error.schematic_generator.noRegistry": "Failed to get block registry",
