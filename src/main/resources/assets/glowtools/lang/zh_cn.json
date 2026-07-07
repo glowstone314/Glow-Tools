@@ -122,6 +122,7 @@
 
   "glowtools.warning.schematic_generator.requireLitematica": "此功能需要安装投影(Litematica)模组！",
   "glowtools.warning.schematic_generator.downloadLitematica": "下载Litematica (Modrinth)",
+  "glowtools.warning.schematic_generator.litematicaVersion": "当前投影(Litematica)模组版本有安全漏洞，请更新！",
 
   "glowtools.error.schematic_generator.blockEmpty": "方块不能为空",
   "glowtools.error.schematic_generator.noRegistry": "获取方块注册表失败",

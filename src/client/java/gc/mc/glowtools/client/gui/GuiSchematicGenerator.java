@@ -10,6 +10,9 @@ import gc.mc.glowtools.client.config.ShapeMode;
 import gc.mc.glowtools.client.compat.LitematicaBridge;
 import gc.mc.glowtools.client.util.math.ShapeStrategy;
 import gc.mc.glowtools.client.util.math.impl.*;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.Version;
+import net.fabricmc.loader.api.VersionParsingException;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -26,7 +29,7 @@ import java.util.Map;
 
 public class GuiSchematicGenerator extends GuiBase {
     private static final boolean IS_LITEMATICA_LOADED =
-            net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("litematica");
+            FabricLoader.getInstance().isModLoaded("litematica");
 
     private static final Map<ShapeMode, ShapeStrategy> STRATEGIES = new HashMap<>();
     private static ShapeMode currentMode = ShapeMode.LINE;
@@ -74,6 +77,14 @@ public class GuiSchematicGenerator extends GuiBase {
             this.addButton(backButton, (button, mouseButton) -> GuiBase.openGui(new GuiConfigs()));
             return;
         }
+
+        Version v = FabricLoader.getInstance().getModContainer("litematica").get().getMetadata().getVersion();
+        try {
+            int compare = v.compareTo(Version.parse("0.27.9"));
+            if (compare < 0) {
+                this.addMessage(MessageType.WARNING, "glowtools.warning.schematic_generator.litematicaVersion");
+            }
+        } catch (VersionParsingException ignored) {}
 
         int x = 12;
         int y = 30;
