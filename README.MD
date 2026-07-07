@@ -59,6 +59,11 @@ A powerful tool for organizing fishing loot or massive chest hauls, allowing you
 * 修改版伪潜行：在有不超过 1.25 格落差时允许玩家前进。
 * Modified Fake Sneak: When the drop does not exceed 1.25 blocks, players are allowed to move forward.
 
+### 投影生成器 Schematic Generator
+
+* 可指定方块、形状、尺寸在内存中生成一个投影原理图。支持直线、斜线、立方体、球、椭球、圆柱、椭圆柱。  
+* Generate a Litematica schematic in memory with specified block, shape, and size. Supported shapes include straight line, diagonal, cube, sphere, ellipsoid, cylinder, and elliptical cylinder.
+
 ## 前置模组 Dependencies
 
 [malilib](https://github.com/sakura-ryoko/malilib)

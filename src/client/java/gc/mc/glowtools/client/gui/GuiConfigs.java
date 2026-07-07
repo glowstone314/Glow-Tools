@@ -1,6 +1,7 @@
 package gc.mc.glowtools.client.gui;
 
 import fi.dy.masa.malilib.config.IConfigBase;
+import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.ButtonGeneric;
@@ -68,19 +69,23 @@ public class GuiConfigs extends GuiConfigsBase {
 
         @Override
         public void actionPerformedWithButton(ButtonBase button, int mouseButton) {
-            GuiConfigs.currentTab = this.tab;
-            this.parent.reCreateListWidget();
-            this.parent.getListWidget().resetScrollbarPosition();
-            this.parent.initGui();
+            if (tab == ConfigGuiTab.SCHEMATIC_GENERATOR) {
+                GuiBase.openGui(new GuiSchematicGenerator());
+            } else {
+                GuiConfigs.currentTab = this.tab;
+                this.parent.reCreateListWidget();
+                this.parent.getListWidget().resetScrollbarPosition();
+                this.parent.initGui();
+            }
         }
     }
 
-    // 标签页定义
     public enum ConfigGuiTab {
         ENTITY_ALERTS       ("glowtools.gui.button.config_gui.entity_alerts"),
         TROPICAL_FISH       ("glowtools.gui.button.config_gui.tropical_fish"),
         TRANSFER_ENCHANTED  ("glowtools.gui.button.config_gui.transfer_enchanted"),
-        OTHERS              ("glowtools.gui.button.config_gui.others");
+        OTHERS              ("glowtools.gui.button.config_gui.others"),
+        SCHEMATIC_GENERATOR ("glowtools.gui.button.config_gui.schematic_generator");
 
         private final String translationKey;
 
