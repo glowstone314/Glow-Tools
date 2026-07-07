@@ -49,6 +49,8 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     implementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_out}:${project.malilib_version}"
     implementation "fi.dy.masa.tweakeroo:tweakeroo-fabric-${project.minecraft_version_out}:${project.tweakeroo_version}"
+
+    implementation "com.github.sakura-ryoko:litematica:${project.minecraft_version_out}-${project.litematica_version}"
     compileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
 }
 
@@ -58,6 +60,7 @@ processResources {
     inputs.property "loader_version", project.loader_version
     inputs.property "malilib_version", project.malilib_version
     inputs.property "tweakeroo_version", project.tweakeroo_version
+    inputs.property "litematica_version", project.litematica_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
@@ -65,7 +68,8 @@ processResources {
                 "minecraft_version": project.minecraft_version,
                 "loader_version": project.loader_version,
                 "malilib_version": project.malilib_version,
-                "tweakeroo_version": project.tweakeroo_version
+                "tweakeroo_version": project.tweakeroo_version,
+                "litematica_version": project.litematica_version
     }
 }
 
