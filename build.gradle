@@ -49,8 +49,8 @@ dependencies {
     implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     implementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_out}:${project.malilib_version}"
     implementation "fi.dy.masa.tweakeroo:tweakeroo-fabric-${project.minecraft_version_out}:${project.tweakeroo_version}"
+    implementation "fi.dy.masa.litematica:litematica-fabric-${project.minecraft_version_out}:${project.litematica_version}"
 
-    implementation "com.github.sakura-ryoko:litematica:${project.minecraft_version_out}-${project.litematica_version}"
     compileOnly "com.terraformersmc:modmenu:${project.mod_menu_version}"
 }
 
