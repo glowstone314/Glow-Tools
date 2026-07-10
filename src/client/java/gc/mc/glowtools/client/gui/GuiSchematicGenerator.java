@@ -54,6 +54,8 @@ public class GuiSchematicGenerator extends GuiBase {
         this.title = StringUtils.translate("glowtools.gui.button.config_gui.schematic_generator");
     }
 
+    private static boolean reminded = false;
+
     @Override
     public void initGui() {
         super.initGui();
@@ -78,13 +80,16 @@ public class GuiSchematicGenerator extends GuiBase {
             return;
         }
 
-        Version v = FabricLoader.getInstance().getModContainer("litematica").get().getMetadata().getVersion();
-        try {
-            int compare = v.compareTo(Version.parse("0.26.11"));
-            if (compare < 0) {
-                this.addMessage(MessageType.WARNING, "glowtools.warning.schematic_generator.litematicaVersion");
-            }
-        } catch (VersionParsingException ignored) {}
+        if (!reminded) {
+            Version v = FabricLoader.getInstance().getModContainer("litematica").get().getMetadata().getVersion();
+            try {
+                int compare = v.compareTo(Version.parse("0.26.11"));
+                if (compare < 0) {
+                    this.addMessage(MessageType.WARNING, "glowtools.warning.schematic_generator.litematicaVersion");
+                }
+                reminded = true;
+            } catch (VersionParsingException ignored) {}
+        }
 
         int x = 12;
         int y = 30;
