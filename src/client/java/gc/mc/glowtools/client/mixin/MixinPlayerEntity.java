@@ -1,6 +1,5 @@
 package gc.mc.glowtools.client.mixin;
 
-import fi.dy.masa.tweakeroo.config.FeatureToggle;
 import gc.mc.glowtools.client.compat.TweakerooCompatibility;
 import gc.mc.glowtools.client.config.Configs;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -23,8 +22,7 @@ public abstract class MixinPlayerEntity {
         if (((Object) this) instanceof ClientPlayerEntity clientPlayer) {
             if (Configs.Others.TWEAKEROO_FAKE_SNEAK_MODIFY.getBooleanValue()) {
                 if (clientPlayer.isSneaking()) return true;
-                BlockPos landingPos = clientPlayer.getBlockPos().down(2);
-                return !isStandable(clientPlayer, landingPos);
+                return !isStandable(clientPlayer);
             }
             if (TweakerooCompatibility.isTweakerooFakeSneakEnabled()) {
                 return true;
@@ -34,7 +32,7 @@ public abstract class MixinPlayerEntity {
     }
 
     @Unique
-    private boolean isStandable(ClientPlayerEntity player, BlockPos pos) {
+    private boolean isStandable(ClientPlayerEntity player) {
         double playerY = player.getY();
         BlockPos basePos = player.getBlockPos();
 
