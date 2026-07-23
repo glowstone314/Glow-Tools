@@ -43,10 +43,14 @@ public class EntityAlertHandler {
             }
         });
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ALERTED_ENTITIES.clear());
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            ALERTED_ENTITIES.clear();
+        });
     }
 
     public static boolean isTargetEntity(Entity entity) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.world == null) return false;
         if (!Configs.EntityAlerts.ENABLE_ALERTS.getBooleanValue()) return false;
         if (Configs.EntityAlerts.IGNORE_NAMED_ENTITIES.getBooleanValue() && entity.hasCustomName()) return false;
 
@@ -94,7 +98,8 @@ public class EntityAlertHandler {
                 if (client.world != null) {
                     LocalTime currentTime = LocalTime.now();
                     Text title = Text.translatable("glowtools.chat.entity_alerts.disconnect_title");
-                    Text reason =Text.literal("in " + currentTime.format(formatter) + "\nat " + formatPos(entity.getX(), entity.getY(), entity.getZ()));
+                    Text reason =Text.literal("in " + currentTime.format(formatter) +
+                            "\nat " + formatPos(entity.getX(), entity.getY(), entity.getZ()));
 
                     client.world.disconnect(null);
                     client.disconnect(null);
