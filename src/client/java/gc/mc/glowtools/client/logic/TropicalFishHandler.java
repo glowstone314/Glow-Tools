@@ -91,8 +91,9 @@ public class TropicalFishHandler {
         }
     }
 
-    public static boolean isTargetFish(TropicalFish fish) {
+    public static boolean isTargetFish(Entity entity) {
         if (!Configs.TropicalFish.ENABLE_TROPICAL_FISH_ALERTS.getBooleanValue()) return false;
+        if (!(entity instanceof TropicalFish fish)) return false;
         if (Configs.TropicalFish.IGNORE_FROM_BUCKET.getBooleanValue() && fish.fromBucket()) return false;
         int variantId = ((TropicalFishAccessor) fish).invokeGetPackedVariant();
         return RareFishHelper.isRareTropicalFish(variantId);
