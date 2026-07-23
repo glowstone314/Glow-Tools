@@ -8,9 +8,7 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.DisconnectedScreen;
 import net.minecraft.client.gui.screens.TitleScreen;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.fox.Fox;
 import net.minecraft.world.entity.monster.illager.Pillager;
@@ -42,12 +40,15 @@ public class EntityAlertHandler {
             }
         });
 
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> ALERTED_ENTITIES.clear());
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
+            ALERTED_ENTITIES.clear();
+        });
     }
 
     public static boolean isTargetEntity(Entity entity) {
         Minecraft client = Minecraft.getInstance();
         if (client.level == null) return false;
+        if (!Configs.EntityAlerts.ENABLE_ALERTS.getBooleanValue()) return false;
         if (Configs.EntityAlerts.IGNORE_NAMED_ENTITIES.getBooleanValue() && entity.hasCustomName()) return false;
 
         switch (entity) {
@@ -96,7 +97,8 @@ public class EntityAlertHandler {
                 if (client.level != null) {
                     LocalTime currentTime = LocalTime.now();
                     Component title = Component.translatable("glowtools.chat.entity_alerts.disconnect_title");
-                    Component reason = Component.literal("in " + currentTime.format(formatter) + "\nat " + formatPos(entity.getX(), entity.getY(), entity.getZ()));
+                    Component reason = Component.literal("in " + currentTime.format(formatter) +
+                            "\nat " + formatPos(entity.getX(), entity.getY(), entity.getZ()));
 
                     client.level.disconnect(Component.empty());
                     client.disconnect(new DisconnectedScreen(new TitleScreen(), title, reason), true);
