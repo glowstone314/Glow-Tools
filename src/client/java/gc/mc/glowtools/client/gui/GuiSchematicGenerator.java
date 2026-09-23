@@ -11,8 +11,6 @@ import gc.mc.glowtools.client.compat.LitematicaBridge;
 import gc.mc.glowtools.client.util.math.ShapeStrategy;
 import gc.mc.glowtools.client.util.math.impl.*;
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.Version;
-import net.fabricmc.loader.api.VersionParsingException;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +20,7 @@ import net.minecraft.client.gui.screens.ConfirmLinkScreen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,21 +69,13 @@ public class GuiSchematicGenerator extends GuiBase {
             String downloadText = StringUtils.translate("glowtools.warning.schematic_generator.downloadLitematica");
             ButtonGeneric downloadButton = new ButtonGeneric(centerX - 90, centerY, 180, 20, downloadText);
             this.addButton(downloadButton, (button, mouseButton) ->
-                    ConfirmLinkScreen.confirmLinkNow(this, "https://modrinth.com/mod/litematica", true));
+                    ConfirmLinkScreen.confirmLinkNow(this, URI.create("https://modrinth.com/mod/litematica"), true));
 
             ButtonGeneric backButton = new ButtonGeneric(this.getScreenWidth() - 120, this.getScreenHeight() - 30,
                     100, 20, StringUtils.translate("gui.back"));
             this.addButton(backButton, (button, mouseButton) -> GuiBase.openGui(new GuiConfigs()));
             return;
         }
-
-        Version v = FabricLoader.getInstance().getModContainer("litematica").get().getMetadata().getVersion();
-        try {
-            int compare = v.compareTo(Version.parse("0.28.3"));
-            if (compare < 0) {
-                this.addMessage(MessageType.WARNING, "glowtools.warning.schematic_generator.litematicaVersion");
-            }
-        } catch (VersionParsingException ignored) {}
 
         int x = 12;
         int y = 30;
